@@ -1,0 +1,41 @@
+version: "3.2"
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    image: ${ACCOUNT_ID}.dkr.ecr.ap-southeast-1.amazonaws.com/${REPO_NAMESPACE}/nginx:latest
+    volumes:
+      - type: volume
+        source: document-root
+        target: /var/www/html
+        read_only: true
+        volume:
+          nocopy: true
+      # For local development
+      # - ./src:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    networks:
+      - default
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    image: ${ACCOUNT_ID}.dkr.ecr.ap-southeast-1.amazonaws.com/${REPO_NAMESPACE}/php-laravel:latest
+    volumes:
+      - document-root:/var/www/html
+      # For local development
+      # - ./src:/var/www/html
+    env_file:
+      - ./docker/app/laravel.local.env
+    networks:
+      - default
+
+networks:
+  default:
+
+volumes:
+  document-root:
+

@@ -1,0 +1,228 @@
+{
+  "family": "fargate-example",
+  "taskRoleArn": "arn:aws:iam::${ACCOUNT_ID}:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::${ACCOUNT_ID}:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+      {
+          "name": "nginx",
+          "image": "${ACCOUNT_ID}.dkr.ecr.ap-southeast-1.amazonaws.com/${REPO_NAMESPACE}/nginx:latest",
+          "portMappings": [
+              {
+                  "containerPort": 80,
+                  "hostPort": 80,
+                  "protocol": "tcp"
+              }
+          ],
+          "essential": true,
+          "entryPoint": [],
+          "command": [],
+          "environment": [],
+          "mountPoints": [],
+          "volumesFrom": [
+              {
+                  "sourceContainer": "php",
+                  "readOnly": true
+              }
+          ],
+          "disableNetworking": false,
+          "privileged": false,
+          "readonlyRootFilesystem": false,
+          "dnsServers": [],
+          "dnsSearchDomains": [],
+          "dockerSecurityOptions": [],
+          "interactive": true,
+          "pseudoTerminal": true,
+          "dockerLabels": {
+              "KeyName": ""
+          },
+          "ulimits": [
+              {
+                  "name": "nice",
+                  "softLimit": 0,
+                  "hardLimit": 0
+              }
+          ],
+          "logConfiguration": { 
+              "logDriver": "awslogs",
+              "options": { 
+                 "awslogs-group" : "/ecs/fargate-task-definition",
+                 "awslogs-region": "ap-southeast-1",
+                 "awslogs-stream-prefix": "ecs"
+              }
+          }
+      },
+      {
+          "name": "php",
+          "image": "${ACCOUNT_ID}.dkr.ecr.ap-southeast-1.amazonaws.com/${REPO_NAMESPACE}/php-laravel:latest",
+          "portMappings": [],
+          "essential": true,
+          "entryPoint": [],
+          "command": [],
+          "environment": [
+              {
+                "name": "APP_DEBUG",
+                "value": "true"
+              },
+              {
+                "name": "APP_ENV",
+                "value": "development"
+              },
+              {
+                "name": "APP_KEY",
+                "value": "base64:KqTIA6NYOlMUR7XAv7G9QXtWJcLvkohj/zEl/7QP0KQ="
+              },
+              {
+                "name": "APP_NAME",
+                "value": "Laravell"
+              },
+              {
+                "name": "APP_URL",
+                "value": "http://localhost"
+              },
+              {
+                "name": "BROADCAST_DRIVER",
+                "value": "log"
+              },
+              {
+                "name": "CACHE_DRIVER",
+                "value": "file"
+              },
+              {
+                "name": "DB_CONNECTION",
+                "value": "mysql"
+              },
+              {
+                "name": "DB_DATABASE",
+                "value": "homestead"
+              },
+              {
+                "name": "DB_HOST",
+                "value": "127.0.0.1"
+              },
+              {
+                "name": "DB_PASSWORD",
+                "value": "secret"
+              },
+              {
+                "name": "DB_PORT",
+                "value": "3306"
+              },
+              {
+                "name": "DB_USERNAME",
+                "value": "homestead"
+              },
+              {
+                "name": "LOG_CHANNEL",
+                "value": "stack"
+              },
+              {
+                "name": "MAIL_DRIVER",
+                "value": "smtp"
+              },
+              {
+                "name": "MAIL_ENCRYPTION",
+                "value": "null"
+              },
+              {
+                "name": "MAIL_HOST",
+                "value": "smtp.mailtrap.io"
+              },
+              {
+                "name": "MAIL_PASSWORD",
+                "value": "null"
+              },
+              {
+                "name": "MAIL_PORT",
+                "value": "2525"
+              },
+              {
+                "name": "MAIL_USERNAME",
+                "value": "null"
+              },
+              {
+                "name": "MIX_PUSHER_APP_CLUSTER",
+                "value": "\"${PUSHER_APP_CLUSTER}\""
+              },
+              {
+                "name": "MIX_PUSHER_APP_KEY",
+                "value": "\"${PUSHER_APP_KEY}\""
+              },
+              {
+                "name": "PUSHER_APP_CLUSTER",
+                "value": "mt1"
+              },
+              {
+                "name": "PUSHER_APP_ID",
+                "value": ""
+              },
+              {
+                "name": "PUSHER_APP_KEY",
+                "value": ""
+              },
+              {
+                "name": "PUSHER_APP_SECRET",
+                "value": ""
+              },
+              {
+                "name": "QUEUE_DRIVER",
+                "value": "sync"
+              },
+              {
+                "name": "REDIS_HOST",
+                "value": "127.0.0.1"
+              },
+              {
+                "name": "REDIS_PASSWORD",
+                "value": "null"
+              },
+              {
+                "name": "REDIS_PORT",
+                "value": "6379"
+              },
+              {
+                "name": "SESSION_DRIVER",
+                "value": "file"
+              },
+              {
+                "name": "SESSION_LIFETIME",
+                "value": "120"
+              }
+          ],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "disableNetworking": false,
+          "privileged": false,
+          "readonlyRootFilesystem": false,
+          "dnsServers": [],
+          "dnsSearchDomains": [],
+          "dockerSecurityOptions": [],
+          "interactive": true,
+          "pseudoTerminal": true,
+          "dockerLabels": {
+              "KeyName": ""
+          },
+          "ulimits": [
+              {
+                  "name": "nice",
+                  "softLimit": 0,
+                  "hardLimit": 0
+              }
+          ],
+          "logConfiguration": { 
+              "logDriver": "awslogs",
+              "options": { 
+                 "awslogs-group" : "/ecs/fargate-task-definition",
+                 "awslogs-region": "ap-southeast-1",
+                 "awslogs-stream-prefix": "ecs"
+              }
+          }
+      }
+  ],
+  "volumes": [],
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

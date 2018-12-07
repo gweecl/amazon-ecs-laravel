@@ -1,0 +1,66 @@
+{
+    "cluster": "fargate-example",
+    "serviceName": "",
+    "taskDefinition": "",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "",
+            "loadBalancerName": "",
+            "containerName": "",
+            "containerPort": 0
+        }
+    ],
+    "serviceRegistries": [
+        {
+            "registryArn": "",
+            "port": 0,
+            "containerName": "",
+            "containerPort": 0
+        }
+    ],
+    "desiredCount": 0,
+    "clientToken": "",
+    "launchType": "EC2",
+    "platformVersion": "",
+    "role": "",
+    "deploymentConfiguration": {
+        "maximumPercent": 0,
+        "minimumHealthyPercent": 0
+    },
+    "placementConstraints": [
+        {
+            "type": "distinctInstance",
+            "expression": ""
+        }
+    ],
+    "placementStrategy": [
+        {
+            "type": "random",
+            "field": ""
+        }
+    ],
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                ""
+            ],
+            "securityGroups": [
+                ""
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "healthCheckGracePeriodSeconds": 0,
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "ECS"
+    },
+    "tags": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "enableECSManagedTags": true,
+    "propagateTags": "SERVICE"
+}

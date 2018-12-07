@@ -1,0 +1,34 @@
+{
+    "cluster": "fargate-cluster",
+    "serviceName": "service-example",
+    "taskDefinition": "fargate-example",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "${ALB_TARGET_GROUP}",
+            "containerName": "nginx",
+            "containerPort": 80
+        }
+    ],
+    "serviceRegistries": [],
+    "desiredCount": 1,
+    "clientToken": "",
+    "launchType": "FARGATE",
+    "role": "",
+    "deploymentConfiguration": {
+        "maximumPercent": 200,
+        "minimumHealthyPercent": 50
+    },
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                ""
+            ],
+            "securityGroups": [
+                ""
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "healthCheckGracePeriodSeconds": 2,
+    "schedulingStrategy": "REPLICA"
+}
